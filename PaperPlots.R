@@ -358,57 +358,57 @@ for(i in 1:2){
 ######## DATA ANALYSIS PLOTS ###########
 ########################################
 
-# If the data set RainData.Rdata is available, run DataEstimators.R and then uncomment and run
-# the following code to produce the "real data" plots from Section 6 of the paper
+If the data set RainData.Rdata is available, run DataEstimators.R and then uncomment and run
+the following code to produce the "real data" plots from Section 6 of the paper
 
 
-# # source("DataEstimators.R") # Run once, to produce the estimators
-# load("DataEstimators.Rdata")
-# load("SpInfo.Rdata")
-# 
-# 
-# # Scatter plot with curve
-# j = 4
-# setEPS()
-# postscript(file = paste0("./Plots/Estimators_m", m_values[j], ".eps"), width = 5, height = 5.5)
-# par(cex = 1, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, pty="s", mar = c(5,5,4,2) +.1)
-# plot(distance, all_estimators_data[1:np,j], col = "blue",
-#      xlab = "Distance (units of latitude)", ylab = expression(paste("Estimated ", theta)))
+# source("DataEstimators.R") # Run once, to produce the estimators
+load("DataEstimators.Rdata")
+load("SpInfo.Rdata")
+
+
+# Scatter plot with curve
+j = 4
+setEPS()
+postscript(file = paste0("./Plots/Estimators_m", m_values[j], ".eps"), width = 5, height = 5.5)
+par(cex = 1, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, pty="s", mar = c(5,5,4,2) +.1)
+plot(distance, all_estimators_data[1:np,j], col = "blue",
+     xlab = "Distance (units of latitude)", ylab = expression(paste("Estimated ", theta)))
+lines(sort(distance), sapply(sort(distance), theta_f,
+                                 a = all_estimators_data[np+1,j], s = all_estimators_data[np+2,j]))
 # lines(sort(distance), sapply(sort(distance), theta_f,
-#                                  a = all_estimators_data[np+1,j], s = all_estimators_data[np+2,j]))
-# # lines(sort(distance), sapply(sort(distance), theta_f,
-# #                              a = all_estimators_data[np+3,j], s = all_estimators_data[np+4,j]), lty = 2)
-# dev.off()
-# 
-# # Bunch of curves
-# J = 2*(1:5)
-# setEPS()
-# postscript(file = "./Plots/Curves1.eps", width = 5, height = 5.5)
-# par(cex = 1, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, pty="s", mar = c(5,5,4,2) +.1)
-# plot(NULL, xlim = sort(distance)[c(1, np)], ylim = c(0.5, 0.75),
-#      xlab = expression(paste("Distance in units of latitude ", (Delta))),
-#      ylab = expression(paste(theta, "(", Delta, "; ",  hat(alpha), ",", hat(beta), ")")))
-# for(j in J){
-#   lines(sort(distance), sapply(sort(distance), theta_f,
-#                                a = all_estimators_data[np+1,j], s = all_estimators_data[np+2,j]), col = j/2)
-# }
-# legend(x=0, y=0.75, legend=paste("m = ", m_values[J]), lty=1, col=1:5)
-# dev.off()
-# 
-# # Map
-# setEPS()
-# postscript(file = "./Plots/Map.eps", width = 5, height = 5.5)
-# par(cex = 1, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, pty="s", mar = c(5,5,4,2) +.1)
-# plot(gr, pch=16, col="red", xlim = c(140.5, 147.5), ylim = c(-40, -33),
-#      xlab = "Longitude (degrees)", ylab = "Latitude (degrees)")
-# oz(add = TRUE)
-# dev.off()
-# 
-# # Histogram of distances
-# setEPS()
-# postscript(file = "./Plots/Distances.eps", width = 5, height = 5.5)
-# par(cex = 0.8, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, pty="s", mar = c(5,5,4,2) +.1)
-# hist(distance, xlab = "Distance (units of latitude)", main = "")
-# dev.off()
+#                              a = all_estimators_data[np+3,j], s = all_estimators_data[np+4,j]), lty = 2)
+dev.off()
+
+# Bunch of curves
+J = 2*(1:5)
+setEPS()
+postscript(file = "./Plots/Curves1.eps", width = 5, height = 5.5)
+par(cex = 1, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, pty="s", mar = c(5,5,4,2) +.1)
+plot(NULL, xlim = sort(distance)[c(1, np)], ylim = c(0.5, 0.75),
+     xlab = expression(paste("Distance in units of latitude ", (Delta))),
+     ylab = expression(paste(theta, "(", Delta, "; ",  hat(alpha), ",", hat(beta), ")")))
+for(j in J){
+  lines(sort(distance), sapply(sort(distance), theta_f,
+                               a = all_estimators_data[np+1,j], s = all_estimators_data[np+2,j]), col = j/2)
+}
+legend(x=0, y=0.75, legend=paste("m = ", m_values[J]), lty=1, col=1:5)
+dev.off()
+
+# Map
+setEPS()
+postscript(file = "./Plots/Map.eps", width = 5, height = 5.5)
+par(cex = 1, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, pty="s", mar = c(5,5,4,2) +.1)
+plot(gr, pch=16, col="red", xlim = c(140.5, 147.5), ylim = c(-40, -33),
+     xlab = "Longitude (degrees)", ylab = "Latitude (degrees)")
+oz(add = TRUE)
+dev.off()
+
+# Histogram of distances
+setEPS()
+postscript(file = "./Plots/Distances.eps", width = 5, height = 5.5)
+par(cex = 0.8, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, pty="s", mar = c(5,5,4,2) +.1)
+hist(distance, xlab = "Distance (units of latitude)", main = "")
+dev.off()
 
 

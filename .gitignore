@@ -42,4 +42,4 @@ vignettes/*.pdf
 *.eps
 
 # Rainfall data set
-RainData.Rdata
+# RainData.Rdata
